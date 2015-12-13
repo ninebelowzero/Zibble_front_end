@@ -4,14 +4,14 @@ angular
 
 UsersController.$inject = ['$scope', 'User', 'TokenService'];
 function UsersController($scope, User, TokenService){
-  $scope.test = "Testing, 1, 2, 3...";
+
   $scope.user = {};
 
   function handleLogin(res){
     var token = res.token ? res.token : null;
 
     if(token){
-      console.log(res);
+      // console.log(res);
       $scope.user = TokenService.getUser();
     }
     $scope.message = res.message;
@@ -21,9 +21,14 @@ function UsersController($scope, User, TokenService){
     User.login($scope.user, handleLogin);
   }
 
-  $scope.register = function(){
-    User.join($scope.user, handleLogin);
+  $scope.logout = function(){
+    TokenService.removeToken();
+    $scope.user = {};
   }
+
+  // $scope.register = function(){
+  //   User.register($scope.user, handleLogin);
+  // }
 
   $scope.isLoggedIn = function(){
     return !!TokenService.getToken();
