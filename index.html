@@ -21,5 +21,11 @@
   <h1>Logged in: {{ isLoggedIn() }}</h1>
   <h1>Current user: {{ user }}</h1>
 
+  <form ng-submit="login()">
+    <input name="username" placeholder="Username" ng-model="user.username">
+    <input name="password" placeholder="Password" ng-model="user.password">
+    <button>Log In</button>
+  </form>
+
 </body>
 </html>
