@@ -13,9 +13,13 @@
   <script type="text/javascript" src="./js/models/user.js"></script>
   <script type="text/javascript" src="./js/controllers/UsersController.js"></script>
   <script type="text/javascript" src="./js/services/TokenService.js"></script>
+  <script type="text/javascript" src="./js/services/AuthInterceptor.js"></script>
 
 </head>
 <body ng-controller="UsersController">
   <h1>{{ test }}</h1>
+  <h1>Logged in: {{ isLoggedIn() }}</h1>
+  <h1>Current user: {{ user }}</h1>
+
 </body>
 </html>
