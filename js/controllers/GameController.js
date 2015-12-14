@@ -2,8 +2,11 @@ angular
   .module('zibble')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', 'Game'];
-function GameController($scope, Game){
+GameController.$inject = ['$scope', '$timeout', 'Game'];
+function GameController($scope, $timeout, Game){
+
+  $scope.isCorrect = "n-a";
+  $scope.showingAnswer = false;
 
   $scope.correct    = 0;
   $scope.incorrect  = 0;
@@ -20,54 +23,69 @@ function GameController($scope, Game){
         getDefinitionAnswers();
       } else {
         $scope.incorrect++;
-        getNextCharacter();
+        $scope.isCorrect = "incorrect";
+        $scope.message = "Wrong!";
+        $scope.showingAnswer = true;
+        $timeout(getNextCharacter, 2000); 
       }
     } else if ($scope.asking == "definition"){
       if (choice == $scope.selectedCharacter.kDefinition){
         $scope.correct++;
-        getNextCharacter();    
+        $scope.isCorrect = "correct";
+        $scope.message = "Correct!";
+        $timeout(getNextCharacter, 2000); 
       } else {
         $scope.incorrect++;
-        getNextCharacter();
+        $scope.isCorrect = "incorrect";
+        $scope.message = "Wrong!";
+        $scope.showingAnswer = true;
+        $timeout(getNextCharacter, 2000); 
       }
     }
   }
 
   function getNextCharacter(){
-    $scope.asking = "pinyin";
-    $scope.selectedCharacter = $scope.characters.shift();
-
-    $scope.answers = [
-      $scope.selectedCharacter.kMandarin,
-      getRandomCharacter().kMandarin,
-      getRandomCharacter().kMandarin,
-      getRandomCharacter().kMandarin
-    ]
-
-    $scope.answers = _.shuffle($scope.answers);
-
-    $scope.answers = _.map($scope.answers, function(answer){
-      return answer.split(" ")[0].toLowerCase();
-    });
+    console.log("Getting next character.");
+    $scope.message = "";
+    $scope.showingAnswer = false;
+    if ($scope.characters.length == 0){
+      endOfLevel();
+    } else {  
+      console.log("Asking for pinyin...");
+      $scope.asking = "pinyin";
+      $scope.selectedCharacter = $scope.characters.shift();
+  
+      $scope.answers = [
+        $scope.selectedCharacter.kMandarin,
+        getRandomCharacter().kMandarin,
+        getRandomCharacter().kMandarin,
+        getRandomCharacter().kMandarin
+      ]
+  
+      $scope.answers = _.shuffle($scope.answers);
+  
+      $scope.answers = _.map($scope.answers, function(answer){
+        return answer.split(" ")[0].toLowerCase();
+      });
+    }
   }
 
   function getDefinitionAnswers(){
 
-    $scope.answers = [
-      $scope.selectedCharacter.kDefinition,
-      getRandomCharacter().kDefinition,
-      getRandomCharacter().kDefinition,
-      getRandomCharacter().kDefinition
-    ]
-
+    $scope.answers = [ $scope.selectedCharacter.kDefinition ]
+    _(3).times(function(){
+      $scope.answers.push(getRandomCharacter().kDefinition);
+    });
     $scope.answers = _.shuffle($scope.answers);
 
   }
-
 
   function getRandomCharacter() {
     return $scope.characters[Math.ceil(Math.random() * $scope.characters.length)];
   }
 
+  function endOfLevel(){
+    $scope.message = "You have completed level 1!";
+  }
 
 }

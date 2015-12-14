@@ -23,4 +23,21 @@ p.top-row, p.middle-row, p.bottom-row {
 span.answer {
   padding-left: 40px;
   padding-right: 40px;
+  border: 2px solid black;
+}
+
+.message {
+  font-size: 20px;
+}
+
+.n-a {
+  color: black;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
 }
