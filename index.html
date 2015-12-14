@@ -13,16 +13,16 @@
   <!-- Local JS -->
   <script type="text/javascript" src="./js/app.js"></script>
   <script type="text/javascript" src="./js/models/user.js"></script>
+  <script type="text/javascript" src="./js/models/game.js"></script>
   <script type="text/javascript" src="./js/controllers/UsersController.js"></script>
+  <script type="text/javascript" src="./js/controllers/GameController.js"></script>
   <script type="text/javascript" src="./js/services/TokenService.js"></script>
   <script type="text/javascript" src="./js/services/AuthInterceptor.js"></script>
 
 </head>
-<body ng-controller="UsersController">
-<!--   <h1>Logged in: {{ isLoggedIn() }}</h1>
-  <h1>Current user: {{ user.username }}</h1> -->
+<body>
 
-  <header>
+  <header ng-controller="UsersController">
     <nav>
       <ul>
         <li><a ui-sref-active="active" ui-sref="home">Home</a></li>

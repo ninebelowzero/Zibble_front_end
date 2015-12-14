@@ -1,7 +1,11 @@
-<form ng-hide="isLoggedIn()" ng-submit="login()">
-  <input name="username" placeholder="Username" ng-model="user.username">
-  <input name="password" placeholder="Password" ng-model="user.password">
-  <button>Log In</button>
-</form>
+<div ng-controller="UsersController">
 
-<button ng-show="isLoggedIn()" ng-click="logout()">Log Out</button>
+  <form ng-hide="isLoggedIn()" ng-submit="login()">
+    <input name="username" placeholder="Username" ng-model="user.username">
+    <input name="password" placeholder="Password" ng-model="user.password">
+    <button>Log In</button>
+  </form>
+  
+  <button ng-show="isLoggedIn()" ng-click="logout()">Log Out</button>
+
+</div>
