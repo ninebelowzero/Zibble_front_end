@@ -5,8 +5,6 @@ angular
 Game.$inject = ['$resource', 'API'];
 function Game($resource, API){
 
-  return $resource(API + '/game', null, {
-    'firstBatch'    : { method: 'GET', url: API + '/game/firstbatch' }
-  });
+  return $resource(API + '/levels/:id', {id: '@_id'});
 
 }

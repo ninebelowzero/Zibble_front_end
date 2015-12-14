@@ -11,7 +11,9 @@ function GameController($scope, $timeout, Game){
   $scope.correct    = 0;
   $scope.incorrect  = 0;
 
-  Game.firstBatch(function(data) {
+  $scope.level = 1;
+
+  Game.get({ id: $scope.level }, function(data){
     $scope.characters = _.shuffle(data.characters);
     getNextCharacter();
   });
@@ -45,23 +47,18 @@ function GameController($scope, $timeout, Game){
   }
 
   function getNextCharacter(){
-    console.log("Getting next character.");
     $scope.message = "";
     $scope.showingAnswer = false;
     if ($scope.characters.length == 0){
       endOfLevel();
-    } else {  
-      console.log("Asking for pinyin...");
+    } else {
       $scope.asking = "pinyin";
       $scope.selectedCharacter = $scope.characters.shift();
   
-      $scope.answers = [
-        $scope.selectedCharacter.kMandarin,
-        getRandomCharacter().kMandarin,
-        getRandomCharacter().kMandarin,
-        getRandomCharacter().kMandarin
-      ]
-  
+      $scope.answers = [ $scope.selectedCharacter.kMandarin ]
+      _(3).times(function(){
+        $scope.answers.push(getRandomCharacter().kDefinition);
+      });
       $scope.answers = _.shuffle($scope.answers);
   
       $scope.answers = _.map($scope.answers, function(answer){
@@ -71,13 +68,11 @@ function GameController($scope, $timeout, Game){
   }
 
   function getDefinitionAnswers(){
-
     $scope.answers = [ $scope.selectedCharacter.kDefinition ]
     _(3).times(function(){
       $scope.answers.push(getRandomCharacter().kDefinition);
     });
     $scope.answers = _.shuffle($scope.answers);
-
   }
 
   function getRandomCharacter() {

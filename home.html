@@ -3,9 +3,9 @@
   <p>Correct: {{ correct }}</p>
   <p>Incorrect: {{ incorrect }}</p>
 
-  <p class="message" ng-class="isCorrect" ng-model="message">{{ message }}</p>
+  <p ng-show="message" class="message" ng-class="isCorrect">{{ message }}</p>
 
-  <p>Select the correct {{ asking }}</p>
+  <p ng-hide="message">Select the correct {{ asking }}</p>
 
   <p class="giant">{{ selectedCharacter.String }}</p>
 
@@ -23,7 +23,7 @@
   </div>
 
   <div ng-show="showingAnswer">
-    <p>{{ selectedCharacter.kMandarin }}</p>
+    <p>{{ selectedCharacter.kMandarin.split(" ")[0].toLowerCase() }}</p>
     <p>{{ selectedCharacter.kDefinition }}</p>
   </div>
 
