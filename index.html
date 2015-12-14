@@ -19,19 +19,23 @@
   <script type="text/javascript" src="./js/services/TokenService.js"></script>
   <script type="text/javascript" src="./js/services/AuthInterceptor.js"></script>
 
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="./css/pure.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+
 </head>
 <body>
 
   <header ng-controller="UsersController">
-    <nav>
-      <ul>
-        <li><a ui-sref-active="active" ui-sref="home">Home</a></li>
-        <li><a ui-sref-active="active" ui-sref="account">Account</a></li>
+    <nav class="pure-menu pure-menu-horizontal">
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a class="pure-menu-link" ui-sref-active="pure-menu-selected" ui-sref="home">Home</a></li>
+        <li class="pure-menu-item"><a class="pure-menu-link" ui-sref-active="pure-menu-selected" ui-sref="account">Account</a></li>
       </ul>
     </nav>
   </header>
 
-  <main ui-view>
+  <main class="container" ui-view>
   </main>
 
 </body>

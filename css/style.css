@@ -1,0 +1,26 @@
+
+li.pure-menu-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  border: 3px solid blue;
+  text-align: center;
+}
+
+.giant {
+  font-size: 120px;
+  margin: 10px;
+}
+
+p.top-row, p.middle-row, p.bottom-row {
+  padding: 10px;
+}
+
+span.answer {
+  padding-left: 40px;
+  padding-right: 40px;
+}

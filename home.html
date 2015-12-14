@@ -1,9 +1,16 @@
 <div ng-controller ="GameController">
 
-  <h1>You are home.</h1>
-  
-  <p>Characters:</p>
+  <p class="giant">{{ selectedCharacter }}</p>
 
-  <p>{{ characters }}</p>
+  <p class="top-row">
+    <span class="answer">{{ answerA }}</span>
+  </p>
+  <p class="middle-row">
+    <span class="answer">{{ answerB }}</span>
+    <span class="answer">{{ answerC }}</span>
+  </p>
+  <p class="bottom-row">
+    <span class="answer">{{ answerD }}</span>
+  </p>
 
 </div>
