@@ -1,16 +1,26 @@
 <div ng-controller ="GameController">
 
+  <p>Correct: {{ correct }}</p>
+  <p>Incorrect: {{ incorrect }}</p>
+
+  <p>Select the correct {{ asking }}</p>
+
   <p class="giant">{{ selectedCharacter.String }}</p>
 
   <p class="top-row">
-    <span class="answer">{{ answerA }}</span>
+    <span class="answer" ng-click="choose(answers[0])">{{ answers[0] }}</span>
   </p>
   <p class="middle-row">
-    <span class="answer">{{ answerB }}</span>
-    <span class="answer">{{ answerC }}</span>
+    <span class="answer" ng-click="choose(answers[1])">{{ answers[1] }}</span>
+    <span class="answer" ng-click="choose(answers[2])">{{ answers[2] }}</span>
   </p>
   <p class="bottom-row">
-    <span class="answer">{{ answerD }}</span>
+    <span class="answer" ng-click="choose(answers[3])">{{ answers[3] }}</span>
   </p>
+
+  <br>
+  <br>
+  <br>
+  <p>Selected character id: {{ selectedCharacter._id }}</p>
 
 </div>

@@ -5,51 +5,63 @@ angular
 GameController.$inject = ['$scope', 'Game'];
 function GameController($scope, Game){
 
-  $scope.levelLoaded = false;
-  $scope.characters = [];
-  $scope.selectedCharacter = null;
-  $scope.answerA = null;
-  $scope.answerB = null;
-  $scope.answerC = null;
-  $scope.answerD = null;
+  $scope.correct    = 0;
+  $scope.incorrect  = 0;
 
   Game.firstBatch(function(data) {
-    $scope.characters        = data.characters;
-    $scope.selectedCharacter = getRandomCharacter();
-    getAnswers();
-    $scope.levelLoaded = true;
-
-    // do some game logic, now data has loaded...
+    $scope.characters = _.shuffle(data.characters);
+    getNextCharacter();
   });
 
-  function getAnswers(){
+  $scope.choose = function(choice){
+    if ($scope.asking == "pinyin"){
+      if (choice == $scope.selectedCharacter.kMandarin.split(" ")[0].toLowerCase()){
+        $scope.asking = "definition";
+        getDefinitionAnswers();
+      } else {
+        $scope.incorrect++;
+        getNextCharacter();
+      }
+    } else if ($scope.asking == "definition"){
+      if (choice == $scope.selectedCharacter.kDefinition){
+        $scope.correct++;
+        getNextCharacter();    
+      } else {
+        $scope.incorrect++;
+        getNextCharacter();
+      }
+    }
+  }
 
-    var answers = [
+  function getNextCharacter(){
+    $scope.asking = "pinyin";
+    $scope.selectedCharacter = $scope.characters.shift();
+
+    $scope.answers = [
       $scope.selectedCharacter.kMandarin,
       getRandomCharacter().kMandarin,
       getRandomCharacter().kMandarin,
       getRandomCharacter().kMandarin
     ]
 
-    answers = _.map(answers, function(answer){
+    $scope.answers = _.shuffle($scope.answers);
+
+    $scope.answers = _.map($scope.answers, function(answer){
       return answer.split(" ")[0].toLowerCase();
     });
+  }
 
-    // REGEX NEEDED...
-    // answers = _.map(answers, function(answer){
-    //   if (_.last(answer) == "1"){
-    //     console.log(answer[answer.length - 2]);
-    //   }
-    // });
+  function getDefinitionAnswers(){
 
-    answers = _.shuffle(answers);
+    $scope.answers = [
+      $scope.selectedCharacter.kDefinition,
+      getRandomCharacter().kDefinition,
+      getRandomCharacter().kDefinition,
+      getRandomCharacter().kDefinition
+    ]
 
-    $scope.answerA = answers[0];
-    $scope.answerB = answers[1];
-    $scope.answerC = answers[2];
-    $scope.answerD = answers[3];
+    $scope.answers = _.shuffle($scope.answers);
 
-    console.log(answers);
   }
 
 
