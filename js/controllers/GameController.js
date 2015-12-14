@@ -32,8 +32,15 @@ function GameController($scope, Game){
     ]
 
     answers = _.map(answers, function(answer){
-      return answer.toLowerCase();
+      return answer.split(" ")[0].toLowerCase();
     });
+
+    // REGEX NEEDED...
+    // answers = _.map(answers, function(answer){
+    //   if (_.last(answer) == "1"){
+    //     console.log(answer[answer.length - 2]);
+    //   }
+    // });
 
     answers = _.shuffle(answers);
 
