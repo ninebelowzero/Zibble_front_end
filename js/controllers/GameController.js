@@ -57,7 +57,7 @@ function GameController($scope, $timeout, Game){
   
       $scope.answers = [ $scope.selectedCharacter.kMandarin ]
       _(3).times(function(){
-        $scope.answers.push(getRandomCharacter().kDefinition);
+        $scope.answers.push(getRandomCharacter().kMandarin);
       });
       $scope.answers = _.shuffle($scope.answers);
   

@@ -11,9 +11,9 @@ function UsersController($scope, User, TokenService){
     var token = res.token ? res.token : null;
 
     if(token){
-      // console.log(res);
       $scope.user = TokenService.getUser();
     }
+
     $scope.message = res.message;
   }
 
@@ -26,9 +26,9 @@ function UsersController($scope, User, TokenService){
     $scope.user = {};
   }
 
-  // $scope.register = function(){
-  //   User.register($scope.user, handleLogin);
-  // }
+  $scope.register = function(){
+    User.register($scope.user, handleLogin);
+  }
 
   $scope.isLoggedIn = function(){
     return !!TokenService.getToken();
