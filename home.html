@@ -3,22 +3,26 @@
   <p>Correct: {{ correct }}</p>
   <p>Incorrect: {{ incorrect }}</p>
 
-  <p ng-show="message" class="message" ng-class="isCorrect">{{ message }}</p>
+  <p ng-show="message" class="info" ng-class="isCorrect">{{ message }}</p>
 
-  <p ng-hide="message">Select the correct {{ asking }}</p>
+  <p ng-hide="message" class="info">Select the correct {{ asking }}</p>
 
   <p class="giant">{{ selectedCharacter.String }}</p>
 
   <div ng-hide="showingAnswer">
-    <p class="top-row">
-      <span class="answer" ng-click="choose(answers[0])">{{ answers[0] }}</span>
+    <p class="row top-row">
+      <span class="three columns invisible">.</span>
+      <span class="six columns answer" ng-click="choose(answers[0])">{{ answers[0] }}</span>
+      <span class="three columns invisible">.</span>
     </p>
-    <p class="middle-row">
-      <span class="answer" ng-click="choose(answers[1])">{{ answers[1] }}</span>
-      <span class="answer" ng-click="choose(answers[2])">{{ answers[2] }}</span>
+    <p class="row middle-row">
+      <span class="six columns answer" ng-click="choose(answers[1])">{{ answers[1] }}</span>
+      <span class="six columns answer" ng-click="choose(answers[2])">{{ answers[2] }}</span>
     </p>
-    <p class="bottom-row">
-      <span class="answer" ng-click="choose(answers[3])">{{ answers[3] }}</span>
+    <p class="row bottom-row">
+      <span class="three columns invisible">.</span>
+      <span class="six columns answer" ng-click="choose(answers[3])">{{ answers[3] }}</span>
+      <span class="three columns invisible">.</span>
     </p>
   </div>
 

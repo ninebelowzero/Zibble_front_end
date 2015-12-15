@@ -1,33 +1,76 @@
-
-li.pure-menu-item {
-  margin-top: 20px;
-  margin-bottom: 20px;
+* {
+  color: white;
+  background-color: black;
 }
 
-.container {
+.invisible {
+  color: black;
+}
+
+.container {/*
   width: 80%;
-  margin: 0 auto;
-  border: 3px solid blue;
-  text-align: center;
+  margin: 0 auto;*/
+  border: 2px ridge #bbb;
+  border-radius: 10px;
+  /*text-align: center;*/
+  max-width: 500px;
+  padding: 10px;
+}
+
+header nav ul {
+  list-style: none;
+}
+
+header nav ul li {
+  display: inline-block;
+  margin: 20px;
+}
+
+
+form input {
+  display: block;
+  /*margin: 10px;*/
+  height: 26px;
+  border-radius: 7px;
+  border: solid 1px #bbb;
+  padding: 5px;
+}
+
+form button {
+  display: block;
+/*  margin: 10px;*/
 }
 
 .giant {
-  font-size: 120px;
+  font-size: 14.0rem;
   margin: 10px;
+  text-align: center;
 }
 
 p.top-row, p.middle-row, p.bottom-row {
   padding: 10px;
+  text-align: center;
+  /*height: 80px;*/
 }
 
 span.answer {
   padding-left: 40px;
   padding-right: 40px;
-  border: 2px solid black;
+  border: 1px solid #bbb;
+  border-radius: 50px;
+  height: 50px;
+  cursor: pointer;
+
+  text-overflow: clip;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
 }
 
-.message {
+.info {
   font-size: 20px;
+  text-align: center;
 }
 
 .n-a {

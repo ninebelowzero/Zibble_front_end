@@ -2,8 +2,13 @@ angular
   .module('zibble')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', '$timeout', 'Game'];
-function GameController($scope, $timeout, Game){
+// var regexTheHellOutOfIt = require('./regexTheHellOutOfIt');
+// console.log(regexTheHellOutOfIt);
+
+GameController.$inject = ['$scope', '$timeout', 'Game', 'RegexService'];
+function GameController($scope, $timeout, Game, RegexService){
+
+  console.log(RegexService);
 
   $scope.isCorrect = "n-a";
   $scope.showingAnswer = false;
@@ -20,7 +25,7 @@ function GameController($scope, $timeout, Game){
 
   $scope.choose = function(choice){
     if ($scope.asking == "pinyin"){
-      if (choice == $scope.selectedCharacter.kMandarin.split(" ")[0].toLowerCase()){
+      if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
         $scope.asking = "definition";
         getDefinitionAnswers();
       } else {
@@ -62,7 +67,7 @@ function GameController($scope, $timeout, Game){
       $scope.answers = _.shuffle($scope.answers);
   
       $scope.answers = _.map($scope.answers, function(answer){
-        return answer.split(" ")[0].toLowerCase();
+        return RegexService.clean(answer);
       });
     }
   }
