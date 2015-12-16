@@ -5,39 +5,30 @@
 
   <p class="card">{{ selectedCharacter.String }}</p>
 
-  <div ng-hide="showingAnswer">
-    <p class="row top-row">
-      <span class="three columns invisible">.</span>
-      <span class="six columns answer" ng-click="choose(answers[0])">
-        <span class="arrow">▲</span><br>
-        {{ answers[0] }}
-      </span>
-      <span class="three columns invisible">.</span>
-    </p>
-    <p class="row middle-row">
-      <span class="six columns answer" ng-click="choose(answers[1])">
-        <span class="arrow">◀</span><br>
-        {{ answers[1] }}
-      </span>
-      <span class="six columns answer" ng-click="choose(answers[2])">
-        <span class="arrow">▶</span><br>
-        {{ answers[2] }}
-      </span>
-    </p>
-    <p class="row bottom-row">
-      <span class="three columns invisible">.</span>
-      <span class="six columns answer" ng-click="choose(answers[3])">
-        <span class="arrow">▼</span><br>
-        {{ answers[3] }}
-      </span>
-      <span class="three columns invisible">.</span>
-    </p>
-  </div>
+  <ul class="answers">
+  <li ng-click="choose(answers[0])">
+    <span class="arrow">▲</span>
+    {{ answers[0] }}
+  </li>
+
+  <li ng-click="choose(answers[1])">
+    <span class="arrow">◀</span>
+    {{ answers[1] }}
+  </li>
+
+  <li ng-click="choose(answers[2])">
+    <span class="arrow">▶</span>
+    {{ answers[2] }}
+  </li>
+
+  <li ng-click="choose(answers[3])">
+    <span class="arrow">▼</span>
+    {{ answers[3] }}
+  </li>
 
   <div id="trackpad">
-    <p ng-show="message" class="info" ng-class="rightOrWrong">{{ message }}</p>
-    <p ng-show="showingAnswer">{{ correctPinyin }}</p>
-    <p ng-show="showingAnswer">{{ selectedCharacter.kDefinition }}</p>
+    <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>
+    <p ng-show="showingAnswer">{{ correctPinyin }}: {{ selectedCharacter.kDefinition }}</p>
   </div>
 
 </div>

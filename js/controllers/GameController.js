@@ -5,7 +5,7 @@ angular
 GameController.$inject = ['$scope', '$timeout', 'Game', 'RegexService'];
 function GameController($scope, $timeout, Game, RegexService){
 
-  $scope.rightOrWrong  = null;
+  $scope.rightOrWrong  = "neither";
   $scope.message       = null;
   $scope.asking        = "pinyin";
   $scope.showingAnswer = false;
@@ -15,13 +15,19 @@ function GameController($scope, $timeout, Game, RegexService){
 
   Game.get({ id: $scope.level }, function(data){
     $scope.characters = _.shuffle(data.characters);
+    $scope.characters = _.filter($scope.characters, function(character){
+      if (!character.kMandarin || !character.kDefinition) return false;
+      return true;
+    });
+    // console.log($scope.characters);
     getNextCharacter();
   });
 
   function getNextCharacter(){
     $timeout(function(){
       $scope.showingAnswer = false;
-      $scope.rightOrWrong = null;
+      $scope.asking = "pinyin";
+      $scope.rightOrWrong = "neither";
       $scope.message = "Select the right pinyin.";
       if ($scope.right == 0 && $scope.wrong == 0){
         $scope.message += " Swipe up, down, left or right.";
