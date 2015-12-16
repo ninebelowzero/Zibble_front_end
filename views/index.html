@@ -22,7 +22,6 @@
   <script type="text/javascript" src="./js/services/AuthInterceptor.js"></script>
 
   <!-- CSS -->
-  <!-- <link rel="stylesheet" type="text/css" href="./css/pure.css"> -->
   <link rel="stylesheet" type="text/css" href="./css/normalize.css">
   <link rel="stylesheet" type="text/css" href="./css/skeleton.css">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -31,8 +30,8 @@
 <body>
 
   <header ng-controller="UsersController">
-    <nav class="pure-menu pure-menu-horizontal">
-      <ul class="pure-menu-list">
+    <nav>
+      <ul>
         <li><a ui-sref-active="active" ui-sref="home">Home</a></li>
         <li ng-hide="isLoggedIn()"><a ui-sref-active="active" ui-sref="login">Log In</a></li>
         <li ng-hide="isLoggedIn()"><a ui-sref-active="active" ui-sref="signup">Sign Up</a></li>

@@ -1,34 +1,43 @@
 <div ng-controller ="GameController">
 
-  <p>Correct: {{ correct }}</p>
-  <p>Incorrect: {{ incorrect }}</p>
-
-  <p ng-show="message" class="info" ng-class="isCorrect">{{ message }}</p>
-
-  <p ng-hide="message" class="info">Select the correct {{ asking }}</p>
+  <p class="correct-score">Right: {{ correct }}</p>
+  <p class="incorrect-score">Wrong: {{ incorrect }}</p>
 
   <p class="giant">{{ selectedCharacter.String }}</p>
 
   <div ng-hide="showingAnswer">
     <p class="row top-row">
       <span class="three columns invisible">.</span>
-      <span class="six columns answer" ng-click="choose(answers[0])">{{ answers[0] }}</span>
+      <span class="six columns answer" ng-click="choose(answers[0])">
+        <span class="arrow">▲</span><br>
+        {{ answers[0] }}
+      </span>
       <span class="three columns invisible">.</span>
     </p>
     <p class="row middle-row">
-      <span class="six columns answer" ng-click="choose(answers[1])">{{ answers[1] }}</span>
-      <span class="six columns answer" ng-click="choose(answers[2])">{{ answers[2] }}</span>
+      <span class="six columns answer" ng-click="choose(answers[1])">
+        <span class="arrow">◀</span><br>
+        {{ answers[1] }}
+      </span>
+      <span class="six columns answer" ng-click="choose(answers[2])">
+        <span class="arrow">▶</span><br>
+        {{ answers[2] }}
+      </span>
     </p>
     <p class="row bottom-row">
       <span class="three columns invisible">.</span>
-      <span class="six columns answer" ng-click="choose(answers[3])">{{ answers[3] }}</span>
+      <span class="six columns answer" ng-click="choose(answers[3])">
+        <span class="arrow">▼</span><br>
+        {{ answers[3] }}
+      </span>
       <span class="three columns invisible">.</span>
     </p>
   </div>
 
-  <div ng-show="showingAnswer">
-    <p>{{ correctPinyin }}</p>
-    <p>{{ selectedCharacter.kDefinition }}</p>
+  <div id="trackpad">
+    <p ng-show="message" class="info" ng-class="rightOrWrong">{{ message }}</p>
+    <p ng-show="showingAnswer">{{ correctPinyin }}</p>
+    <p ng-show="showingAnswer">{{ selectedCharacter.kDefinition }}</p>
   </div>
 
 </div>

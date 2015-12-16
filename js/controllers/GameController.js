@@ -2,16 +2,15 @@ angular
   .module('zibble')
   .controller('GameController', GameController);
 
-// var regexTheHellOutOfIt = require('./regexTheHellOutOfIt');
-// console.log(regexTheHellOutOfIt);
-
 GameController.$inject = ['$scope', '$timeout', 'Game', 'RegexService'];
 function GameController($scope, $timeout, Game, RegexService){
 
-  $scope.isCorrect     = "n-a";
+  $scope.rightOrWrong  = null;
+  $scope.message       = null;
+  $scope.asking        = "pinyin";
   $scope.showingAnswer = false;
-  $scope.correct       = 0;
-  $scope.incorrect     = 0;
+  $scope.right         = 0;
+  $scope.wrong         = 0;
   $scope.level         = 1;
 
   Game.get({ id: $scope.level }, function(data){
@@ -19,7 +18,32 @@ function GameController($scope, $timeout, Game, RegexService){
     getNextCharacter();
   });
 
+  function getNextCharacter(){
+    $timeout(function(){
+      $scope.showingAnswer = false;
+      $scope.rightOrWrong = null;
+      $scope.message = "Select the right pinyin.";
+      if ($scope.right == 0 && $scope.wrong == 0){
+        $scope.message += " Swipe up, down, left or right.";
+      }
+      if ($scope.characters.length == 0){
+        endOfLevel();
+      } else {
+        $scope.selectedCharacter = $scope.characters.shift();     
+        $scope.answers = [ $scope.selectedCharacter.kMandarin ]
+        _(3).times(function(){
+          $scope.answers.push(getRandomCharacter().kMandarin);
+        });
+        $scope.answers = _.shuffle($scope.answers);      
+        $scope.answers = _.map($scope.answers, function(answer){
+          return RegexService.clean(answer);
+        });
+      }
+    }, 1000)
+  }
+
   $scope.choose = function(choice){
+    console.log(choice);
     if ($scope.asking == "pinyin"){
       if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
         $scope.asking = "definition";
@@ -36,44 +60,8 @@ function GameController($scope, $timeout, Game, RegexService){
     }
   }
 
-  function rightAnswer(){
-    $scope.correct++;
-    $scope.isCorrect = "correct";
-    $scope.message = "Right!";
-    getNextCharacter();
-  }
-
-  function wrongAnswer(){
-    $scope.incorrect++;
-    $scope.isCorrect = "incorrect";
-    $scope.message = "Wrong!";
-    $scope.showingAnswer = true;
-    $scope.correctPinyin = RegexService.clean($scope.selectedCharacter.kMandarin);
-    getNextCharacter();
-  }
-
-  function getNextCharacter(){
-    $timeout(function(){
-      $scope.message = "";
-      $scope.showingAnswer = false;
-      if ($scope.characters.length == 0){
-        endOfLevel();
-      } else {
-        $scope.asking = "pinyin";
-        $scope.selectedCharacter = $scope.characters.shift();     
-        $scope.answers = [ $scope.selectedCharacter.kMandarin ]
-        _(3).times(function(){
-          $scope.answers.push(getRandomCharacter().kMandarin);
-        });
-        $scope.answers = _.shuffle($scope.answers);      
-        $scope.answers = _.map($scope.answers, function(answer){
-          return RegexService.clean(answer);
-        });
-      }
-    }, 1000)
-  }
-
   function getDefinitionAnswers(){
+    $scope.message = "Select the right definition.";
     $scope.answers = [ $scope.selectedCharacter.kDefinition ]
     _(3).times(function(){
       $scope.answers.push(getRandomCharacter().kDefinition);
@@ -85,8 +73,24 @@ function GameController($scope, $timeout, Game, RegexService){
     return $scope.characters[Math.ceil(Math.random() * $scope.characters.length)];
   }
 
+  function rightAnswer(){
+    $scope.right++;
+    $scope.rightOrWrong = "right";
+    $scope.message = "Correct!";
+    getNextCharacter();
+  }
+
+  function wrongAnswer(){
+    $scope.wrong++;
+    $scope.rightOrWrong = "wrong";
+    $scope.message = "Wrong!";
+    $scope.correctPinyin = RegexService.clean($scope.selectedCharacter.kMandarin);
+    $scope.showingAnswer = true;
+    getNextCharacter();
+  }
+
   function endOfLevel(){
-    $scope.message = "You have completed level 1!";
+    $scope.message = "You have completed level " + $scope.level + "!";
   }
 
 }
