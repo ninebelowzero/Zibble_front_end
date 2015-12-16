@@ -33,25 +33,23 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
   }
 
   function getNextCharacter(){
-    $timeout(function(){
-      $scope.showingAnswer = false;
-      $scope.asking = "pinyin";
-      $scope.rightOrWrong = "neither";
-      $scope.message = "Select the right pinyin.";
-      if ($scope.right == 0 && $scope.wrong == 0){
-        $scope.message += " Swipe up, down, left or right.";
-      }
-      if ($scope.characters.length < 10){
-        endOfLevel();
-      } else {
-        $scope.selectedCharacter = $scope.characters.shift();   
-        $scope.answers = [ $scope.selectedCharacter.kMandarin ]
-        _(3).times(function(){
-          $scope.answers.push(getRandomCharacter().kMandarin);
-        });
-        $scope.answers = _.shuffle($scope.answers);      
-      }
-    }, 1000)
+    $scope.showingAnswer = false;
+    $scope.asking = "pinyin";
+    $scope.rightOrWrong = "neither";
+    $scope.message = "Select the right pinyin.";
+    if ($scope.right == 0 && $scope.wrong == 0){
+      $scope.message += " Swipe up, down, left or right.";
+    }
+    if ($scope.characters.length < 10){
+      endOfLevel();
+    } else {
+      $scope.selectedCharacter = $scope.characters.shift();   
+      $scope.answers = [ $scope.selectedCharacter.kMandarin ]
+      _(3).times(function(){
+        $scope.answers.push(getRandomCharacter().kMandarin);
+      });
+      $scope.answers = _.shuffle($scope.answers);      
+    }
   }
 
   $scope.choose = function(choice){
@@ -88,7 +86,9 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
     $scope.right++;
     $scope.rightOrWrong = "right";
     $scope.message = "Correct!";
-    getNextCharacter();
+    $timeout(function(){
+      getNextCharacter();
+    }, 1000);
   }
 
   function wrongAnswer(){
@@ -97,7 +97,9 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
     $scope.message = "Wrong!";
     $scope.correctPinyin = $scope.selectedCharacter.kMandarin;
     $scope.showingAnswer = true;
-    getNextCharacter();
+    $timeout(function() {
+      getNextCharacter();
+    }, 2000);
   }
 
   function endOfLevel(){
