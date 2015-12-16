@@ -1,6 +1,6 @@
 angular
   .module('zibble', ['angular-jwt', 'ngResource', 'ui.router'])
-  .constant('API', 'http://localhost:3000')
+  .constant('API', 'https://zibble-back-end.herokuapp.com')
   .config(function($httpProvider){
     $httpProvider.interceptors.push('AuthInterceptor');
   })
