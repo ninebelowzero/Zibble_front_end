@@ -10,26 +10,26 @@ function MainRouter($stateProvider, $urlRouterProvider){
   $stateProvider
     .state('home', {
       url         : '/',
-      templateUrl : 'home.html'
+      templateUrl : './views/home.html'
     });
 
   $stateProvider
     .state('login', {
       url         : '/login',
-      templateUrl : 'login.html'
+      templateUrl : './views/login.html'
     });
 
     $stateProvider
       .state('signup', {
         url         : '/signup',
-        templateUrl : 'signup.html'
+        templateUrl : './views/signup.html'
       });
 
 
     $stateProvider
       .state('logout', {
         url         : '/logout',
-        templateUrl : 'logout.html'
+        templateUrl : './views/logout.html'
       });
 
   $urlRouterProvider.otherwise('/');
