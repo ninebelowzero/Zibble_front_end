@@ -12,16 +12,18 @@ function GameController($scope, $timeout, Game, RegexService){
   $scope.right         = 0;
   $scope.wrong         = 0;
   $scope.level         = 1;
+  loadLevel();
 
-  Game.get({ id: $scope.level }, function(data){
-    $scope.characters = _.shuffle(data.characters);
-    $scope.characters = _.filter($scope.characters, function(character){
-      if (!character.kMandarin || !character.kDefinition) return false;
-      return true;
+  function loadLevel(){
+    Game.get({ id: $scope.level }, function(data){
+      $scope.characters = _.shuffle(data.characters);
+      $scope.characters = _.filter($scope.characters, function(character){
+        if (!character.kMandarin || !character.kDefinition) return false;
+        return true;
+      });
+      getNextCharacter();
     });
-    // console.log($scope.characters);
-    getNextCharacter();
-  });
+  }
 
   function getNextCharacter(){
     $timeout(function(){
@@ -32,7 +34,7 @@ function GameController($scope, $timeout, Game, RegexService){
       if ($scope.right == 0 && $scope.wrong == 0){
         $scope.message += " Swipe up, down, left or right.";
       }
-      if ($scope.characters.length == 0){
+      if ($scope.characters.length < 10){
         endOfLevel();
       } else {
         $scope.selectedCharacter = $scope.characters.shift();     
@@ -69,9 +71,9 @@ function GameController($scope, $timeout, Game, RegexService){
   function getDefinitionAnswers(){
     $scope.message = "Select the right definition.";
     $scope.answers = [ $scope.selectedCharacter.kDefinition ]
-    _(3).times(function(){
+    while ($scope.answers.length < 4){
       $scope.answers.push(getRandomCharacter().kDefinition);
-    });
+    }
     $scope.answers = _.shuffle($scope.answers);
   }
 
@@ -96,7 +98,16 @@ function GameController($scope, $timeout, Game, RegexService){
   }
 
   function endOfLevel(){
-    $scope.message = "You have completed level " + $scope.level + "!";
+    if($scope.level == 5){
+      $scope.message = "Congratulations! You have learned 4000 characters. Go forth, and multiply.";
+    } else {
+      $scope.message = "You have completed level " + $scope.level + "!";
+      $timeout(function(){
+        $scope.level++;
+        $scope.message = "Loading level " + $scope.level;
+        loadLevel();
+      }, 1000);
+    }
   }
 
 }
