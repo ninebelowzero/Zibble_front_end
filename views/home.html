@@ -1,9 +1,9 @@
 <div ng-controller ="GameController">
 
-  <p class="correct-score right">Right: {{ right }}</p>
-  <p class="incorrect-score wrong">Wrong: {{ wrong }}</p>
-
-  <p class="card">{{ selectedCharacter.String }}</p>
+  <div class="score">
+    <span class="correct-score right">Right: {{ right }}</span>
+    <span class="incorrect-score wrong">Wrong: {{ wrong }}</span>
+  </div>
 
   <ul class="answers">
   <li ng-click="choose(answers[0])">
@@ -27,6 +27,7 @@
   </li>
 
   <div id="trackpad">
+    <p class="card">{{ selectedCharacter.String }}</p>
     <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>
     <p ng-show="showingAnswer">{{ correctPinyin }}: {{ selectedCharacter.kDefinition }}</p>
   </div>

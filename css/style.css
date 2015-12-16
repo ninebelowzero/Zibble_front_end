@@ -3,10 +3,6 @@
   background-color: #111;
 }
 
-.invisible {
-  color: #111;
-}
-
 .container {
   max-width: 500px;
   padding: 10px;
@@ -43,19 +39,26 @@ select {
   color: #333;
 }
 
+.score {
+  display: block;
+  margin: 0 0 1rem 0;
+  width: 100%;
+}
+
 .correct-score {
-  float: left;
+  /*float: left;*/
   margin: 0.2rem;
 }
 
 .incorrect-score {
-  float: right;
+  /*float: right;*/
   margin: 0.2rem;
+  position: relative;
+  left: 4.5rem;
 }
 
 .card {
   font-size: 10.0rem;
-  margin: 0.1rem;
   text-align: center;
   float: clear;
 }
@@ -73,6 +76,7 @@ ul.answers {
 
 ul.answers li {
   cursor: pointer;
+  height: 2.5rem;
 } 
 
 ul.answers li:hover{
