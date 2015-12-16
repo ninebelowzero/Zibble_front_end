@@ -2,8 +2,8 @@ angular
   .module('zibble')
   .controller('UsersController', UsersController);
 
-UsersController.$inject = ['$scope', 'User', 'TokenService'];
-function UsersController($scope, User, TokenService){
+UsersController.$inject = ['$scope', '$location', '$timeout', 'User', 'TokenService'];
+function UsersController($scope, $location, $timeout, User, TokenService){
 
   $scope.user = {};
 
@@ -13,6 +13,7 @@ function UsersController($scope, User, TokenService){
       $scope.user = TokenService.getUser();
     }
     $scope.message = res.message;
+    $location.path("/home");
   }
 
   $scope.login = function(){
@@ -22,6 +23,9 @@ function UsersController($scope, User, TokenService){
   $scope.logout = function(){
     TokenService.removeToken();
     $scope.user = {};
+    $scope.message = "Successfully logged out.";
+    console.log("About to set timeout.");
+    $location.path("/home");
   }
 
   $scope.register = function(){
