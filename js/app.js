@@ -6,7 +6,7 @@ angular
   })
   .config(MainRouter);
 
-function MainRouter($stateProvider, $urlRouterProvider){
+function MainRouter($stateProvider, $urlRouterProvider, $locationProvider){
   $stateProvider
     .state('home', {
       url         : '/',
@@ -19,18 +19,23 @@ function MainRouter($stateProvider, $urlRouterProvider){
       templateUrl : './views/login.html'
     });
 
-    $stateProvider
-      .state('signup', {
-        url         : '/signup',
-        templateUrl : './views/signup.html'
-      });
+  $stateProvider
+    .state('signup', {
+      url         : '/signup',
+      templateUrl : './views/signup.html'
+    });
 
 
-    $stateProvider
-      .state('logout', {
-        url         : '/logout',
-        templateUrl : './views/logout.html'
-      });
+  $stateProvider
+    .state('logout', {
+      url         : '/logout',
+      templateUrl : './views/logout.html'
+    });
 
   $urlRouterProvider.otherwise('/');
+
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
 }
