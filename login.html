@@ -1,0 +1,13 @@
+<div ng-controller="UsersController">
+
+  <p ng-show="message">{{ message }}</p>
+
+  <form ng-hide="isLoggedIn()" ng-submit="login()">
+    <input name="username" placeholder="Username" ng-model="user.username">
+    <input name="password" placeholder="Password" ng-model="user.password">
+    <button>Log In</button>
+  </form>
+
+  <h6 ng-hide="isLoggedIn()" >Don't have an account? <a ui-sref="signup">Sign up!</a></h6>
+
+</div>

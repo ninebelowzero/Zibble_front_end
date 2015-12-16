@@ -14,10 +14,23 @@ function MainRouter($stateProvider, $urlRouterProvider){
     });
 
   $stateProvider
-    .state('account', {
-      url         : '/account',
-      templateUrl : 'account.html'
+    .state('login', {
+      url         : '/login',
+      templateUrl : 'login.html'
     });
+
+    $stateProvider
+      .state('signup', {
+        url         : '/signup',
+        templateUrl : 'signup.html'
+      });
+
+
+    $stateProvider
+      .state('logout', {
+        url         : '/logout',
+        templateUrl : 'logout.html'
+      });
 
   $urlRouterProvider.otherwise('/');
 }

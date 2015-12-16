@@ -33,8 +33,10 @@
   <header ng-controller="UsersController">
     <nav class="pure-menu pure-menu-horizontal">
       <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a class="pure-menu-link" ui-sref-active="pure-menu-selected" ui-sref="home">Home</a></li>
-        <li class="pure-menu-item"><a class="pure-menu-link" ui-sref-active="pure-menu-selected" ui-sref="account">Account</a></li>
+        <li><a ui-sref-active="active" ui-sref="home">Home</a></li>
+        <li ng-hide="isLoggedIn()"><a ui-sref-active="active" ui-sref="login">Log In</a></li>
+        <li ng-hide="isLoggedIn()"><a ui-sref-active="active" ui-sref="signup">Sign Up</a></li>
+        <li ng-show="isLoggedIn()"><a ui-sref-active="active" ui-sref="logout">Log Out</a></li>
       </ul>
     </nav>
   </header>

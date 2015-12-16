@@ -1,0 +1,21 @@
+<div ng-controller="UsersController">
+
+  <p ng-show="message">{{ message }}</p>
+
+  <form ng-hide="isLoggedIn()" ng-submit="register()">
+    <input name="username" placeholder="Username" ng-model="user.username">
+    <input name="email" placeholder="Email" ng-model="user.email">
+    <input name="password" placeholder="Password" ng-model="user.password">
+
+    <label for="experience">How long have you been learning Chinese?</label>
+    <select name="experience">
+      <option>Beginner</option>
+      <option>1 year +</option>
+      <option>2 years +</option>
+      <option>5 years +</option>
+    </select>
+
+    <button>Sign Up</button>
+  </form>
+
+</div>

@@ -1,18 +1,13 @@
 * {
-  color: white;
-  background-color: black;
+  color: #eee;
+  background-color: #111;
 }
 
 .invisible {
-  color: black;
+  color: #111;
 }
 
-.container {/*
-  width: 80%;
-  margin: 0 auto;*/
-  /*border: 2px ridge #bbb;*/
-  border-radius: 10px;
-  /*text-align: center;*/
+.container {
   max-width: 500px;
   padding: 10px;
 }
@@ -26,19 +21,25 @@ header nav ul li {
   margin: 20px;
 }
 
-
 form input {
   display: block;
-  /*margin: 10px;*/
   height: 26px;
   border-radius: 7px;
   border: solid 1px #bbb;
   padding: 5px;
 }
 
-form button {
+form label {
+  font-weight: inherit;
+}
+
+button {
   display: block;
-/*  margin: 10px;*/
+  color: #eee;
+}
+
+select {
+  color: #333;
 }
 
 .giant {
@@ -51,28 +52,19 @@ p.top-row, p.middle-row, p.bottom-row {
   text-overflow: clip; 
   padding: 10px;
   text-align: center;
-  /*height: 80px;*/
 }
 
 span.answer {
   display:block;
   width:inherit;
-  
   line-height: 16px;
   padding-top: 7px;
-
   padding-left: 40px;
   padding-right: 40px;
   border: 1px solid #bbb;
   border-radius: 50px;
   height: 50px;
   cursor: pointer;
-
-  text-overflow: clip;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-
 }
 
 .info {
