@@ -27,10 +27,10 @@
   </li>
 
   <div id="trackpad"
-    ng-swipe-left="swipeLeft()"
-    ng-swipe-right="swipeRight()"
-    ng-swipe-up="swipeUp()"
-    ng-swipe-down="swipeDown()"
+    ng-swipe-up="choose(answers[0])"
+    ng-swipe-left="choose(answers[1])"
+    ng-swipe-right="choose(answers[2])"
+    ng-swipe-down="choose(answers[3])"
   >
     <p class="card">{{ selectedCharacter.String }}</p>
     <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>

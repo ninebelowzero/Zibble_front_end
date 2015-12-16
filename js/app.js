@@ -25,7 +25,6 @@ function MainRouter($stateProvider, $urlRouterProvider, $locationProvider){
       templateUrl : './views/signup.html'
     });
 
-
   $stateProvider
     .state('logout', {
       url         : '/logout',

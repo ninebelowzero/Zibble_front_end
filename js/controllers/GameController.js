@@ -50,30 +50,6 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
     }, 1000)
   }
 
-  ///////// SWIPES /////////////
-
-  $scope.swipeUp = function(){
-    console.log("Swiped up.");
-    $scope.choose($scope.answers[0]);
-  }
-
-  $scope.swipeLeft = function(){
-    console.log("Swiped left.");
-    $scope.choose($scope.answers[1]);
-  }
-
-  $scope.swipeRight = function(){
-    console.log("Swiped right.");
-    $scope.choose($scope.answers[2]);
-  }
-
-  $scope.swipeDown = function(){
-    console.log("Swiped down.");
-    $scope.choose($scope.answers[3]);
-  }
-
-  //////////////////////////////
-
   $scope.choose = function(choice){
   if ($scope.asking == "pinyin"){
     if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
