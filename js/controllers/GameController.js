@@ -21,6 +21,13 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
       if (!character.kMandarin || !character.kDefinition) return false;
       return true;
     });
+    console.log("$scope.characters (1):", $scope.characters);
+    var cleanedCharacters = _.map($scope.characters, function(character){
+      character.kMandarin = RegexService.clean(character.kMandarin);
+      character.kDefinition = RegexService.shorten(character.kDefinition);
+      return character;
+    });
+    console.log("$scope.characters (2):", $scope.characters);
     getNextCharacter();
   });
   }
@@ -37,22 +44,19 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
       if ($scope.characters.length < 10){
         endOfLevel();
       } else {
-        $scope.selectedCharacter = $scope.characters.shift();     
+        $scope.selectedCharacter = $scope.characters.shift();   
         $scope.answers = [ $scope.selectedCharacter.kMandarin ]
         _(3).times(function(){
           $scope.answers.push(getRandomCharacter().kMandarin);
         });
         $scope.answers = _.shuffle($scope.answers);      
-        $scope.answers = _.map($scope.answers, function(answer){
-          return RegexService.clean(answer);
-        });
       }
     }, 1000)
   }
 
   $scope.choose = function(choice){
   if ($scope.asking == "pinyin"){
-    if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
+    if (choice == $scope.selectedCharacter.kMandarin) {
       $scope.asking = "definition";
       getDefinitionAnswers();
     } else {
@@ -91,7 +95,7 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
     $scope.wrong++;
     $scope.rightOrWrong = "wrong";
     $scope.message = "Wrong!";
-    $scope.correctPinyin = RegexService.clean($scope.selectedCharacter.kMandarin);
+    $scope.correctPinyin = $scope.selectedCharacter.kMandarin;
     $scope.showingAnswer = true;
     getNextCharacter();
   }

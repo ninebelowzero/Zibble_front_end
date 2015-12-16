@@ -106,4 +106,12 @@ function RegexService(){
     return str;
   }
 
+  this.shorten = function(str){
+    str = str.split(";");
+    if (str.length > 2){
+      str.splice(2);
+    }
+    str = str.join(";");
+    return str;
+  }
 }
