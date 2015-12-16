@@ -15,14 +15,14 @@ function GameController($scope, $timeout, Game, RegexService){
   loadLevel();
 
   function loadLevel(){
-    Game.get({ id: $scope.level }, function(data){
-      $scope.characters = _.shuffle(data.characters);
-      $scope.characters = _.filter($scope.characters, function(character){
-        if (!character.kMandarin || !character.kDefinition) return false;
-        return true;
-      });
-      getNextCharacter();
+  Game.get({ id: $scope.level }, function(data){
+    $scope.characters = _.shuffle(data.characters);
+    $scope.characters = _.filter($scope.characters, function(character){
+      if (!character.kMandarin || !character.kDefinition) return false;
+      return true;
     });
+    getNextCharacter();
+  });
   }
 
   function getNextCharacter(){
@@ -51,22 +51,45 @@ function GameController($scope, $timeout, Game, RegexService){
   }
 
   $scope.choose = function(choice){
-    console.log(choice);
-    if ($scope.asking == "pinyin"){
-      if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
-        $scope.asking = "definition";
-        getDefinitionAnswers();
-      } else {
-        wrongAnswer();
-      }
-    } else if ($scope.asking == "definition"){
+  console.log(choice);
+  if ($scope.asking == "pinyin"){
+    if (choice == RegexService.clean($scope.selectedCharacter.kMandarin)) {
+      $scope.asking = "definition";
+      getDefinitionAnswers();
+    } else {
+      wrongAnswer();
+    }
+  } else if ($scope.asking == "definition"){
       if (choice == $scope.selectedCharacter.kDefinition){
-        rightAnswer();
+      rightAnswer();
       } else {
         wrongAnswer();
       }
     }
   }
+
+  /////////////////////////////
+  ////// SWIPE EVENTS /////////
+  /////////////////////////////
+  
+  $('#trackpad').on('swipeleft', function(){
+    console.log("Swiped left!");
+  })
+ 
+  $('#trackpad').on('swiperight', function(){
+    console.log("Swiped right!");
+  })
+ 
+  $('#trackpad').on('swipeup', function(){
+    console.log("Swiped up!");
+  })
+ 
+  $('#trackpad').on('swipedown', function(){
+    console.log("Swiped down!");
+  })
+
+
+  /////////////////////////////
 
   function getDefinitionAnswers(){
     $scope.message = "Select the right definition.";
@@ -98,16 +121,89 @@ function GameController($scope, $timeout, Game, RegexService){
   }
 
   function endOfLevel(){
-    if($scope.level == 5){
-      $scope.message = "Congratulations! You have learned 4000 characters. Go forth, and multiply.";
-    } else {
-      $scope.message = "You have completed level " + $scope.level + "!";
-      $timeout(function(){
-        $scope.level++;
-        $scope.message = "Loading level " + $scope.level;
-        loadLevel();
+  if($scope.level == 5){
+    $scope.message = "Congratulations! You have learned 4000 characters. Go forth, and multiply.";
+  } else {
+    $scope.message = "You have completed level " + $scope.level + "!";
+    $timeout(function(){
+      $scope.level++;
+      $scope.message = "Loading level " + $scope.level;
+      loadLevel();
       }, 1000);
     }
   }
+
+  ////////////////////////////
+
+  (function(){
+    var supportTouch    = $.support.touch,
+        scrollEvent     = "touchmove scroll",
+        touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+        touchStopEvent  = supportTouch ? "touchend" : "mouseup",
+        touchMoveEvent  = supportTouch ? "touchmove" : "mousemove";
+    $.event.special.swipeupdown = {
+      setup: function() {
+        var thisObject = this;
+        var $this = $(thisObject);
+        $this.bind(touchStartEvent, function(event) {
+          var data = event.originalEvent.touches ?
+              event.originalEvent.touches[ 0 ] :
+              event,
+              start = {
+                time: (new Date).getTime(),
+                coords: [ data.pageX, data.pageY ],
+                origin: $(event.target)
+              },
+              stop;
+
+          function moveHandler(event) {
+            if (!start) {
+              return;
+            }
+            var data = event.originalEvent.touches ?
+                event.originalEvent.touches[ 0 ] :
+                event;
+            stop = {
+              time: (new Date).getTime(),
+              coords: [ data.pageX, data.pageY ]
+            };
+
+            // prevent scrolling
+            if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+              event.preventDefault();
+            }
+          }
+          $this
+            .bind(touchMoveEvent, moveHandler)
+            .one(touchStopEvent, function(event) {
+              $this.unbind(touchMoveEvent, moveHandler);
+              if (start && stop) {
+                if (stop.time - start.time < 1000 &&
+                    Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                    Math.abs(start.coords[0] - stop.coords[0]) < 75
+                  ){
+                  start.origin
+                    .trigger("swipeupdown")
+                    .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
+                }
+              }
+            start = stop = undefined;
+          });
+        });
+      }
+    };
+    $.each({
+      swipedown: "swipeupdown",
+      swipeup: "swipeupdown"
+    }, function(event, sourceEvent){
+      $.event.special[event] = {
+        setup: function(){
+          $(this).bind(sourceEvent, $.noop);
+        }
+      };
+    });
+
+  })();
+
 
 }
