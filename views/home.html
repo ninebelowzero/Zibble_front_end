@@ -26,7 +26,12 @@
     {{ answers[3] }}
   </li>
 
-  <div id="trackpad" ng-swipe-left="swipeLeft()" ng-swipe-right="swipeRight()">
+  <div id="trackpad"
+    ng-swipe-left="swipeLeft()"
+    ng-swipe-right="swipeRight()"
+    ng-swipe-up="swipeUp()"
+    ng-swipe-down="swipeDown()"
+  >
     <p class="card">{{ selectedCharacter.String }}</p>
     <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>
     <p ng-show="showingAnswer">{{ correctPinyin }}: {{ selectedCharacter.kDefinition }}</p>

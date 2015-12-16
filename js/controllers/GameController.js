@@ -52,6 +52,11 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
 
   ///////// SWIPES /////////////
 
+  $scope.swipeUp = function(){
+    console.log("Swiped up.");
+    $scope.choose($scope.answers[0]);
+  }
+
   $scope.swipeLeft = function(){
     console.log("Swiped left.");
     $scope.choose($scope.answers[1]);
@@ -60,6 +65,11 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
   $scope.swipeRight = function(){
     console.log("Swiped right.");
     $scope.choose($scope.answers[2]);
+  }
+
+  $scope.swipeDown = function(){
+    console.log("Swiped down.");
+    $scope.choose($scope.answers[3]);
   }
 
   //////////////////////////////
