@@ -18,13 +18,15 @@ function BlockersController($scope, User, TokenService){
       console.log("res.blockers:", res.blockers);
 
       if (res.blockers && res.blockers.length > 0){
+        $scope.isLoggedInWithNoBlockers = false;
         $scope.blockers = [];
         res.blockers.forEach(function(blocker){
           console.log("blocker:", blocker);
           $scope.blockers.push(blocker);
         });
       } else {
-        isLoggedInWithNoBlockers = true;
+        console.log("Logged in, with no blockers.");
+        $scope.isLoggedInWithNoBlockers = true;
       }
 
     });
