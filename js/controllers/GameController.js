@@ -2,8 +2,8 @@ angular
   .module('zibble')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', '$timeout', 'Game', 'RegexService', '$swipe'];
-function GameController($scope, $timeout, Game, RegexService, $swipe){
+GameController.$inject = ['$scope', '$timeout', 'Game', 'User', 'RegexService', '$swipe'];
+function GameController($scope, $timeout, Game, User, RegexService, $swipe){
 
   $scope.rightOrWrong  = "neither";
   $scope.message       = null;

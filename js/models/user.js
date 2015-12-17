@@ -5,9 +5,10 @@ angular
 User.$inject = ['$resource', 'API'];
 function User($resource, API){
 
-  return $resource(API + 'users/:id', null, {
+  return $resource(API + 'users/:id', { id: '@id' }, {
     'login'    : { method: 'POST', url: API + '/login'},
-    'register' : { method: 'POST', url: API + '/register' }
+    'register' : { method: 'POST', url: API + '/register' },
+    'getBlockers' : { method: 'GET', url: API + '/users/:id/blockers' }
   });
 
 }
