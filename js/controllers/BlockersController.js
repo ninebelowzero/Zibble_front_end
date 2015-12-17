@@ -11,19 +11,24 @@ function BlockersController($scope, User, TokenService){
   }
   $scope.blockers = [];
 
-  function initialize(){
+  function getBlockers(){
     User.getBlockers({ id: $scope.user._id }, function(res){
       console.log("res:", res);
       console.log("res.blockers:", res.blockers);
-      res.blockers.forEach(function(blocker){
-        console.log("blocker:", blocker);
-        $scope.blockers.push(blocker);
-      });
+
+      if (res.blockers.length > 0){
+        $scope.blockers = [];
+        res.blockers.forEach(function(blocker){
+          console.log("blocker:", blocker);
+          $scope.blockers.push(blocker);
+        });
+      }
+
     });
   }
 
   if ($scope.isLoggedIn){
-    initialize();
+    getBlockers();
   }
   
 }
