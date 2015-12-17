@@ -14,6 +14,12 @@ function MainRouter($stateProvider, $urlRouterProvider, $locationProvider){
     });
 
   $stateProvider
+    .state('blockers', {
+      url         : '/blockers',
+      templateUrl : './views/blockers.html'
+    });
+
+  $stateProvider
     .state('login', {
       url         : '/login',
       templateUrl : './views/login.html'
