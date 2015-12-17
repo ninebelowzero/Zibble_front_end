@@ -1,6 +1,8 @@
 <div ng-controller="BlockersController">
   
-  <p ng-click="getBlockers()">Show blockers.</p>
-  <p>Current user id: {{ user._id }}</p>
+  <div ng-repeat="blocker in blockers">
+    <p class="card">{{ blocker.string }}</p>
+    <p>{{ blocker.pinyin }}: {{blocker.definition }}</p>
+  </div>
 
 </div>
