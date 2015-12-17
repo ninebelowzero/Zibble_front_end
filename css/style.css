@@ -60,13 +60,19 @@ select {
 .card {
   font-size: 10.0rem;
   text-align: center;
-  float: clear;
+  margin: -1.0rem 0;
 }
 
-p.top-row, p.middle-row, p.bottom-row {
-  text-overflow: clip; 
-  padding: 10px;
+#trackpad {
   text-align: center;
+}
+
+#trackpad p {
+  margin: 0;
+}
+
+.messages {
+  margin-top: -1.5rem;
 }
 
 ul.answers {
@@ -87,14 +93,6 @@ span.arrow {
   color: #1EAEDB;
   font-weight: bold;
   font-size: 2.8rem;
-}
-
-#trackpad {
-  text-align: center;
-}
-
-#trackpad p {
-  margin: 0.1rem;
 }
 
 .neither {

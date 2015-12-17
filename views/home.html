@@ -33,8 +33,10 @@
     ng-swipe-down="choose(answers[3])"
   >
     <p class="card">{{ selectedCharacter.String }}</p>
-    <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>
-    <p ng-show="showingAnswer">{{ correctPinyin }}: {{ selectedCharacter.kDefinition }}</p>
+    <div class="messages">
+      <p ng-show="message" ng-class="rightOrWrong">{{ message }}</p>
+      <p ng-show="showingAnswer">{{ correctPinyin }}: {{ selectedCharacter.kDefinition }}</p>
+    </div>
   </div>
 
 </div>
