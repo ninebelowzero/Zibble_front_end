@@ -115,3 +115,14 @@ p.centered {
 span.blue {
   color: #1EAEDB;
 }
+
+.active {
+  color: #888;
+  text-decoration: none;
+}
+
+.active:hover {
+  color: #888;
+  text-decoration: none;
+  cursor: default;
+}

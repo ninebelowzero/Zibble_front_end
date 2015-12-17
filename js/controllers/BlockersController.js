@@ -5,7 +5,10 @@ angular
 BlockersController.$inject = ['$scope', 'User', 'TokenService'];
 function BlockersController($scope, User, TokenService){
 
-  $scope.user = TokenService.getUser();
+  $scope.isLoggedIn = !!TokenService.getToken();
+  if ($scope.isLoggedIn){
+    $scope.user = TokenService.getUser();
+  }
   $scope.blockers = [];
 
   function initialize(){
@@ -19,6 +22,8 @@ function BlockersController($scope, User, TokenService){
     });
   }
 
-  initialize();
+  if ($scope.isLoggedIn){
+    initialize();
+  }
   
 }

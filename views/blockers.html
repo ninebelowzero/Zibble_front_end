@@ -1,10 +1,10 @@
 <div ng-controller="BlockersController">
 
-  <p ng-if="!user">Log in or sign up to store your blockers - the characters that always trip you up.</p>
-  
-  <p>User: {{ user }}</p>
+  <p ng-if="!isLoggedIn">Log in or sign up to store your blockers - the characters that always trip you up.</p>
 
-  <div ng-repeat="blocker in blockers">
+  <p ng-if="isLoggedIn && blockers.length == 0 ">You have no blockers yet, {{ user.username }}. Start going through the flashcards to automatically store the characters that trip you up.</p>
+
+  <div ng-if="isLoggedIn && blockers.length > 0 " ng-repeat="blocker in blockers">
     <p class="card">{{ blocker.string }}</p>
     <p class="centered"><span class="blue">{{ blocker.pinyin }}:</span> {{blocker.definition }}</p>
   </div>
