@@ -1,5 +1,9 @@
 <div ng-controller="BlockersController">
+
+  <p ng-if="!user">Log in or sign up to store your blockers - the characters that always trip you up.</p>
   
+  <p>User: {{ user }}</p>
+
   <div ng-repeat="blocker in blockers">
     <p class="card">{{ blocker.string }}</p>
     <p class="centered"><span class="blue">{{ blocker.pinyin }}:</span> {{blocker.definition }}</p>

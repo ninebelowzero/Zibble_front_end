@@ -1,5 +1,11 @@
 <div ng-controller="UsersController">
-  <p>Are you sure you want to log out, {{ user.username }}?</p>
-  <button ng-click="logout()" ui-sref="home">Log Out</button>
-  <button ui-sref="home">Cancel</button>
+
+  <p ng-show="message">{{ message }}</p>
+
+  <div ng-show="isLoggedIn()">
+    <p>Are you sure you want to log out, {{ user.username }}?</p>
+    <button ng-click="logout()" ui-sref="home">Log Out</button>
+    <button ui-sref="home">Cancel</button>
+  </div>
+
 </div>

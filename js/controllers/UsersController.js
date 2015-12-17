@@ -11,25 +11,28 @@ function UsersController($scope, $location, $timeout, User, TokenService){
     var token = res.token ? res.token : null;
     if(token){
       $scope.user = TokenService.getUser();
+    } else {
+      $scope.message = res.message;
     }
     $scope.message = res.message;
-    $location.path("/home");
   }
 
   $scope.login = function(){
-    User.login($scope.user, handleLogin);
+    User.login($scope.user, handleLogin, function(res){
+      $scope.message = res.data.message;
+    });
   }
 
   $scope.logout = function(){
     TokenService.removeToken();
     $scope.user = {};
     $scope.message = "Successfully logged out.";
-    console.log("About to set timeout.");
-    $location.path("/home");
   }
 
   $scope.register = function(){
-    User.register($scope.user, handleLogin);
+    User.register($scope.user, handleLogin, function(res){
+      $scope.message = res.data.message;
+    });
   }
 
   $scope.isLoggedIn = function(){
