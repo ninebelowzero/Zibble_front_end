@@ -10,6 +10,7 @@ function BlockersController($scope, User, TokenService){
     $scope.user = TokenService.getUser();
   }
   $scope.blockers = [];
+  $scope.isLoggedInWithNoBlockers = false;
 
   function getBlockers(){
     User.getBlockers({ id: $scope.user._id }, function(res){
@@ -22,6 +23,8 @@ function BlockersController($scope, User, TokenService){
           console.log("blocker:", blocker);
           $scope.blockers.push(blocker);
         });
+      } else {
+        isLoggedInWithNoBlockers = true;
       }
 
     });
