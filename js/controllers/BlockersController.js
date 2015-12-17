@@ -17,7 +17,7 @@ function BlockersController($scope, User, TokenService){
       console.log("res:", res);
       console.log("res.blockers:", res.blockers);
 
-      if (res.blockers.length > 0){
+      if (res.blockers && res.blockers.length > 0){
         $scope.blockers = [];
         res.blockers.forEach(function(blocker){
           console.log("blocker:", blocker);
