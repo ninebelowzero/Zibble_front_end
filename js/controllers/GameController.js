@@ -21,13 +21,11 @@ function GameController($scope, $timeout, Game, RegexService, $swipe){
       if (!character.kMandarin || !character.kDefinition) return false;
       return true;
     });
-    console.log("$scope.characters (1):", $scope.characters);
     var cleanedCharacters = _.map($scope.characters, function(character){
       character.kMandarin = RegexService.clean(character.kMandarin);
       character.kDefinition = RegexService.shorten(character.kDefinition);
       return character;
     });
-    console.log("$scope.characters (2):", $scope.characters);
     getNextCharacter();
   });
   }
