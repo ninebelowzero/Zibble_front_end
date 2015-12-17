@@ -107,3 +107,11 @@ span.arrow {
 .wrong {
   color: red;
 }
+
+p.centered {
+  text-align: center;
+}
+
+span.blue {
+  color: #1EAEDB;
+}

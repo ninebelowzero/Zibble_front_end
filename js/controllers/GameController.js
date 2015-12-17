@@ -2,8 +2,16 @@ angular
   .module('zibble')
   .controller('GameController', GameController);
 
-GameController.$inject = ['$scope', '$timeout', 'Game', 'User', 'RegexService', '$swipe'];
-function GameController($scope, $timeout, Game, User, RegexService, $swipe){
+GameController.$inject = ['$scope', '$timeout', 'Game', 'User', 'RegexService', 'TokenService', '$swipe'];
+function GameController($scope, $timeout, Game, User, RegexService, TokenService, $swipe){
+
+  var user;
+  var isLoggedIn = function(){
+    return !!TokenService.getToken();
+  }
+  if (isLoggedIn()){
+    user = TokenService.getUser();    
+  }
 
   $scope.rightOrWrong  = "neither";
   $scope.message       = null;
@@ -95,6 +103,18 @@ function GameController($scope, $timeout, Game, User, RegexService, $swipe){
     $scope.message = "Wrong!";
     $scope.correctPinyin = $scope.selectedCharacter.kMandarin;
     $scope.showingAnswer = true;
+    if (isLoggedIn()){
+      var requestBody = {
+        blockers: {
+          string      : $scope.selectedCharacter.String,
+          pinyin      : $scope.selectedCharacter.kMandarin,
+          definition  : $scope.selectedCharacter.kDefinition
+        }
+      }
+      User.update({ id: user._id }, requestBody, function(res){
+        console.log("In the callback function. res:", res);
+      });
+    };
     $timeout(function() {
       getNextCharacter();
     }, 2000);
